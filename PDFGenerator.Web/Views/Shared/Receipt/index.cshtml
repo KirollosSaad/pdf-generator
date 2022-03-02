@@ -1,0 +1,252 @@
+﻿@model PDFGenerator.Web.Models.ReceiptDTO
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=no;" />
+    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE" />
+    <style>
+        html, body, div, span, applet, object, iframe,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        a, abbr, acronym, address, big, cite, code,
+        del, dfn, em, img, ins, kbd, q, s, samp,
+        small, strike, strong, sub, sup, tt, var,
+        b, u, i, center,
+        dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td,
+        article, aside, canvas, details, embed,
+        figure, figcaption, footer, header, hgroup,
+        menu, nav, output, ruby, section, summary,
+        time, mark, audio, video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+        }
+
+        .field-row {
+            margin-top: 4px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .margin-top-180 {
+            margin-top: 180px;
+        }
+
+        .font-size-20 {
+            font-size: 20px;
+        }
+
+        .margin-bottom-4 {
+            margin-bottom: 4px;
+        }
+
+        .font-bold {
+            font-weight: 700;
+        }
+
+        .margin-top-8 {
+            margin-top: 8px;
+        }
+
+        .margin-top-12 {
+            margin-top: 12px;
+        }
+
+        .page-width {
+            /*width: 710px;
+            display: inline-block;
+            justify-content: center;*/
+        }
+
+        .align-middle {
+            /*display: flex;*/
+            /*justify-content: center;*/
+            /*position: relative;*/
+            padding: 0 30px 0 30px;
+        }
+
+        .parties {
+            display: table;
+            width: 100%;
+            padding: 5px;
+            margin-top: 50px;
+        }
+
+        .parties-box {
+            display: table-cell;
+            width: 40%;
+            /*background-color: #AAA;*/
+            /*padding: 5px;*/
+            /*border: 5px solid white;*/
+            vertical-align: top;
+            height: 100%;
+            /*display: table-cell;*/
+            border: 1px dotted #d9d9d9;
+            /*width: 250px;*/
+            padding: 16px;
+        }
+
+        .date-order {
+            width: 100%;
+            display: inline-flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+
+            .date-order p span {
+                margin-left: 40px;
+            }
+
+        .left-right {
+            width: 100%;
+            display: inline-flex;
+            justify-content: space-between;
+        }
+
+        .description {
+            margin-top: 80px;
+            width: 100%;
+        }
+
+        .hr-item {
+            border: none;
+            height: 4px;
+            margin: 0;
+            background-color: black;
+            -webkit-print-color-adjust: exact;
+        }
+
+        .hr-item-small {
+            border: none;
+            height: 2px;
+            margin: 0;
+            background-color: black;
+            -webkit-print-color-adjust: exact;
+        }
+
+        .description-text {
+            padding: 8px;
+        }
+
+        .text {
+            margin: 8px 0;
+            padding: 8px;
+        }
+
+        .total {
+            width: 100%;
+            margin-top: 40px;
+        }
+
+        .total-box {
+            width: 50%;
+            float: right;
+        }
+    </style>
+</head>
+<body style="padding:0; margin:0; font-family: 'Open Sans';">
+    <div class="align-middle">
+        <div class="page-width">
+            <div class="parties">
+                @if (!Model.LenderIsCompany)
+                {
+                    <div class="parties-box" style="position:relative; left:-20px;">
+                        <p class="status font-bold">Lender</p>
+                        <p class="field-row margin-top-12">@Model.LenderName</p>
+                    </div>
+                }
+                else
+                {
+                    <div class="parties-box" style="position:relative; left:-20px;">
+                        <p class="status font-bold">Lender</p>
+                        <p class="field-row margin-top-12">@Model.LenderCompanyName</p>
+                        <p class="field-row">rep.&nbsp; @Model.LenderName</p>
+                        <p class="field-row">@Model.LenderCompanyId</p>
+                        <p class="field-row">@Model.LenderAddress</p>
+                        <p class="field-row">@Model.LenderZip @Model.LenderCity</p>
+                    </div>
+                }
+
+                @if (!Model.renterIsCompany)
+                {
+                    <div class="parties-box" style="position:relative; left:20px;">
+                        <p class="status font-bold">Renter</p>
+                        <p class="field-row">@Model.RenterName</p>
+                        <p class="field-row">@Model.RenterAddress</p>
+                        <p class="field-row">@Model.RenterZip @Model.RenterCity</p>
+                    </div>
+                }
+                else
+                {
+                    <div class="parties-box" style="position:relative; left:20px;">
+                        <p class="status font-bold">Renter</p>
+                        <p class="field-row margin-top-12">@Model.RenterCompanyName</p>
+                        <p class="field-row"> rep.&nbsp; @Model.RenterName</p>
+                        <p class="field-row">@Model.RenterCompanyId</p>
+                        <p class="field-row">@Model.RenterAddress</p>
+                        <p class="field-row">@Model.RenterZip @Model.RenterCity</p>
+                    </div>
+                }
+
+            </div>
+            <div class="date-order">
+                <p>Date: <span class="font-bold">@Model.AcceptedDate</span></p>
+                <p>Invoice number:<span class="font-bold">@Model.InvoiceNumber</span></p>
+            </div>
+            <div class="description">
+                <p class="font-bold font-size-20">Receipt</p>
+                <hr class="hr-item" />
+                <div class="left-right">
+                    <p class="description-text">Description</p>
+                    <p class="description-text">Price</p>
+                </div>
+                <hr class="hr-item-small" />
+                <div class="left-right">
+                    <p class="text">Wedio order no. @Model.OrderNumber</p>
+                    <p class="text">@Model.TotalDaysPriceAfterMultipleDayDiscount</p>
+                </div>
+                <hr class="hr-item-small" />
+            </div>
+            <div class="total">
+                <div class="total-box">
+                    <div class="left-right">
+                        <p>Sub total</p>
+                        <p>@Model.TotalDaysPriceAfterMultipleDayDiscount</p>
+                    </div>
+                    <div class="left-right margin-top-8">
+                        <p>VAT</p>
+                        <p>@Model.RentalVatWithoutFee</p>
+                    </div>
+                    <div class="left-right margin-top-8 margin-bottom-4">
+                        <p class="font-bold">Total @Model.Currency</p>
+                        <p class="font-bold">@Model.TotalRentalPrice</p>
+                    </div>
+                    <hr class="hr-item" />
+                </div>
+            </div>
+            <div class="margin-top-180">Paid through Wedio</div>
+            <div class="margin-top-180 disclaimer">
+                <hr class="hr-item" />
+                <p class="font-bold text-center margin-top-12">
+                    This is an autogenerated invoice between the lender and the
+                    renter.
+                    <br />
+                    If no VAT is specified, the lender is not VAT registered.
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
