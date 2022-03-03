@@ -1,0 +1,64 @@
+# first line commented
+*.swp
+*.*~
+project.lock.json
+.DS_Store
+*.pyc
+nupkg/
+
+# Visual Studio Code
+.vscode
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+msbuild.log
+msbuild.err
+msbuild.wrn
+
+# Visual Studio 2015
+.vs/
+
+# logs
+logs
+log
+serilog
+*.log
+
+# npm
+node_modules
+
+# generated assets
+
+# legacy but nice to have
+old-Views
+old-wwwroot
+
+# Credentials
+Credentials/
+
+# Test Project
+/_backyard
+_backyard/*
+_backyard/_backyard.csproj
+DSVIoTHub/ServiceState/state.json
+/**/*__bg__virtual.cs
+
+# envrionment files
+.env
+
