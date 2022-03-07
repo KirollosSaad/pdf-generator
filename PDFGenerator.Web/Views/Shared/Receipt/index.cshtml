@@ -78,20 +78,26 @@
         }
 
         .parties {
-            display: table;
+            /*display: table;*/
+            display: -webkit-box;
+            display: -webkit-flex;
             width: 100%;
             padding: 5px;
             margin-top: 50px;
         }
 
         .parties-box {
-            display: table-cell;
+            /*display: table-cell;*/
+            -webkit-box-flex: 1;
+            -webkit-flex: 1;
+            flex: 1;
+            /*margin-right: 10%;*/
             width: 40%;
             /*background-color: #AAA;*/
             /*padding: 5px;*/
             /*border: 5px solid white;*/
-            vertical-align: top;
-            height: 100%;
+            /*vertical-align: top;*/
+            /*height: 100%;*/
             /*display: table-cell;*/
             border: 1px dotted #d9d9d9;
             /*width: 250px;*/
@@ -102,22 +108,37 @@
             width: 100%;
             /*display: inline-flex;*/
             /*justify-content: space-between;*/
-            display:table;
+            display: -webkit-box;
+            display: -webkit-flex;
             margin-top: 40px;
         }
 
-            .date-order p{
-                display:table-cell;
-                /*margin-left: 40px;*/
-                width:50%;
+            .date-order p {
+                -webkit-box-flex: 1;
+                -webkit-flex: 1;
+                flex: 1;
+                width:40%;
             }
 
         .left-right {
             width: 100%;
-            display: table;
+            display: -webkit-box;
+            display: box-flex;
+            /*display: -webkit-flex;*/
+            -webkit-box-pack: justify; /* wkhtmltopdf uses this one */
+            -webkit-justify-content: justify;
+            /*box-align: justify;*/
+            /*justify-content: space-between;*/
             /*display: inline-flex;*/
             /*justify-content: space-between;*/
         }
+
+            .left-right p {
+                /*-webkit-box-flex: 1;*/
+                /*-webkit-flex: 1;*/
+                /*flex: 1;*/
+                /*width: 40%;*/
+            }
 
 
         .description {
@@ -167,14 +188,14 @@
             <div class="parties">
                 @if (!Model.LenderIsCompany)
                 {
-                    <div class="parties-box" style="position:relative; left:-20px;">
+                    <div class="parties-box" style="margin-right:20%;">
                         <p class="status font-bold">Lender</p>
                         <p class="field-row margin-top-12">@Model.LenderName</p>
                     </div>
                 }
                 else
                 {
-                    <div class="parties-box" style="position:relative; left:-20px;">
+                    <div class="parties-box" style="margin-right:20%;">
                         <p class="status font-bold">Lender</p>
                         <p class="field-row margin-top-12">@Model.LenderCompanyName</p>
                         <p class="field-row">rep.&nbsp; @Model.LenderName</p>
@@ -186,7 +207,7 @@
 
                 @if (!Model.renterIsCompany)
                 {
-                    <div class="parties-box" style="position:relative; left:20px;">
+                    <div class="parties-box">
                         <p class="status font-bold">Renter</p>
                         <p class="field-row">@Model.RenterName</p>
                         <p class="field-row">@Model.RenterAddress</p>
@@ -195,7 +216,7 @@
                 }
                 else
                 {
-                    <div class="parties-box" style="position:relative; left:20px;">
+                    <div class="parties-box">
                         <p class="status font-bold">Renter</p>
                         <p class="field-row margin-top-12">@Model.RenterCompanyName</p>
                         <p class="field-row"> rep.&nbsp; @Model.RenterName</p>
@@ -207,8 +228,8 @@
 
             </div>
             <div class="date-order">
-                <p>Date: <span class="font-bold">@Model.AcceptedDate</span></p>
-                <p>Invoice number:<span class="font-bold">@Model.InvoiceNumber</span></p>
+                <p style="margin-right:20%">Date: <span class="font-bold">@Model.AcceptedDate</span></p>
+                <p>Invoice number: <span class="font-bold">@Model.InvoiceNumber</span></p>
             </div>
             <div class="description">
                 <p class="font-bold font-size-20">Receipt</p>

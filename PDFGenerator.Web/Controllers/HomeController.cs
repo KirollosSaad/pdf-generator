@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using PDFGenerator.Web.Models;
 using PDFGenerator.Web.Services.Interfaces;
+using System;
 using System.Diagnostics;
 
 namespace PDFGenerator.Web.Controllers
@@ -19,6 +20,7 @@ namespace PDFGenerator.Web.Controllers
 
         public IActionResult Index()
         {
+            Test(x => x.Currency = "adsdas");
             var receiptData = new ReceiptDTO
             {
                 AcceptedDate = "21-2-2022",
@@ -31,7 +33,7 @@ namespace PDFGenerator.Web.Controllers
                 LenderIsCompany = false,
                 LenderName = "Valeriu Shustaovich",
                 LenderZip = "25004",
-                OrderNumber = "898966164946",
+                OrderNumber = "367763",
                 RentalVatWithoutFee = "10",
                 RenterAddress = "14 MSC st",
                 RenterCity = "Cairo",
@@ -45,6 +47,10 @@ namespace PDFGenerator.Web.Controllers
             };
             var receipt = _receiptGenerator.GenerateReceipt(receiptData);
             return File(receipt, "application/pdf", "receipt.pdf");
+        }
+
+        private void Test(Action<ReceiptDTO> act)
+        {
         }
 
         public IActionResult Test()
@@ -61,14 +67,14 @@ namespace PDFGenerator.Web.Controllers
                 LenderIsCompany = false,
                 LenderName = "Valeriu Shustaovich",
                 LenderZip = "25004",
-                OrderNumber = "898966164946",
+                OrderNumber = "367763",
                 RentalVatWithoutFee = "10",
-                RenterAddress = "14 MSC st",
-                RenterCity = "Cairo",
+                RenterAddress = "Chr M Østergaards Vej",
+                RenterCity = "Alexnandria, EG",
                 RenterCompanyId = "hjkhj-544-sdf54-sdf",
                 RenterCompanyName = "Wedio-2",
                 renterIsCompany = false,
-                RenterName = "kiro",
+                RenterName = "Valeriu Shustaovich 15",
                 RenterZip = "8546",
                 TotalDaysPriceAfterMultipleDayDiscount = "254",
                 TotalRentalPrice = "574"
